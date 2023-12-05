@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+	html,
+	body {
+		height: 100%;
+		width: 100%;
+	}
+    body {
+		display: flex;
+        flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+        margin: 0px;
+        font-size: 12px;
+		background-color: lightblue;
+        overscroll-behavior: none;
+        pointer-events: auto;
+	}	
+	#container {
+		display: flex;
+		flex-direction: column;
+		order: 2;
+		height: 50%;
+		width: 50%;
+		min-height: 0px;
+		font-size: 10em;
+	}
+	#myBtn {
+		--menu-fg-color: yellow;
+		display: flex;
+		height: 100%;
+	}
+	h1 {
+		display: flex;
+		order: 1;
+		width: 100%;
+	}
+	
+	#myBtn[clicked="true"] {
+		opacity: 0.5;
+	}
+	
+	@media (prefers-reduced-motion: reduce) {
+		:root {
+			--reduce-motion: 0s;
+		}
+	}
+	
+</style>
+<script type="module">
+
+	import { ABCMenuButton } from "/menu-button.js"
+
+    document.addEventListener("DOMContentLoaded", (e) => {
+				let myBtn = document.getElementById("myBtn");
+				myBtn.addEventListener('click', (e) => {
+						console.log("been clicked " + myBtn.clicked);
+						})
+			});
+
+</script>
+<script type="application/javascript">
+			
+	function load() {
+		console.log("in load");
+		var x = document.getElementById("myBtn");
+		console.log(x.clicked);
+		x.clicked = false;
+	}
+	
+</script>
+</head>
+<body onload="load()">
+	<h1>Burger Menu Web Component Demo</h1>
+	<div id="container">
+		<abc-menu-button id="myBtn" clicked="true"></abc-menu-button>
+	</div>
+</body>
+</html>
