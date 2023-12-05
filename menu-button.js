@@ -1,4 +1,4 @@
-import sheet from '/menu-button.css' assert {type: 'css'};
+import sheet from './menu-button.css' assert {type: 'css'};
 
 export class ABCMenuButton extends HTMLElement 
 {
