@@ -45,6 +45,9 @@ export class ABCMenuButton extends HTMLElement
         if (!this.isConnected) return;
 		
 		this.#button.addEventListener("click", this.#menuClicked)
+		this.addEventListener("click", (e) => {
+				e.target.clicked = e.target.clicked == "true" ? "false" : "true";
+			});
     }
 
     disconnectedCallback() 
@@ -66,10 +69,6 @@ export class ABCMenuButton extends HTMLElement
 	#menuClicked(e) {
 		let menu = e.target.classList.contains("menu_btn") ? e.target : e.target.closest(".menu_btn");
 
-		menu.addEventListener("animationend", (e) => {
-							menu.classList.remove('menuClick');
-						} , {"once": true}
-					);
 		if (menu.dataset["clicked"] != undefined) {
 			menu.addEventListener("animationend", 
 				(e) => {
@@ -77,8 +76,6 @@ export class ABCMenuButton extends HTMLElement
 					   } , {"once": true}
 					   );
 			menu.classList.add('menuClick');
-			menu.dataset.clicked = (menu.dataset.clicked == "false") ? true : false;
-			this.setAttribute("clicked", menu.dataset.clicked);
 		}
 	}
 
