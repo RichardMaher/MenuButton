@@ -55,13 +55,14 @@ export class ABCMenuButton extends HTMLElement
 		this.addEventListener("click", (e) => {
 				e.target.clicked = e.target.clicked == "true" ? "false" : "true";
 			});
+			
 		if (this.#id != null)
 		{
 			setTimeout(() => {
 				let lightMe = document.getElementById(this.#id);
 				let parentStyle = getComputedStyle(lightMe.parentNode);
-				this.#shadowRoot.host.style.setProperty('--default-bg-color', parentStyle.backgroundColor);
 				this.#shadowRoot.host.style.setProperty('--default-fg-color', parentStyle.color);
+				this.#shadowRoot.host.style.setProperty('--default-bg-color', this.#findBackgroundColor(lightMe.parentNode));
 			}, 0);
 		}
     }
@@ -93,6 +94,22 @@ export class ABCMenuButton extends HTMLElement
 					   );
 			menu.classList.add('menuClick');
 		}
+	}
+	
+	#findBackgroundColor(elem) {
+			let parentStyle = getComputedStyle(elem);
+			if (parentStyle.backgroundColor != "rgba(0, 0, 0, 0)") 
+			{
+				return parentStyle.backgroundColor;
+			}
+			else {
+				if (elem.tagName.toLowerCase() == "body") {
+					return elem.backgrounColor;
+				}
+				else {
+					return this.#findBackgroundColor(elem.parentNode);
+				}
+			}
 	}
 
     get clicked() {
