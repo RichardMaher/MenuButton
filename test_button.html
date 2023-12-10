@@ -67,6 +67,7 @@
 	function load() {
 		console.log("in load");
 		var x = document.getElementById("myBtn");
+		var y = getComputedStyle(x.parentNode);
 		console.log(x.clicked);
 		x.clicked = false;
 	}

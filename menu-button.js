@@ -4,6 +4,7 @@ export class ABCMenuButton extends HTMLElement
 {
 	#shadowRoot;
 	#button;
+	#id;
 	
     constructor() {
         super();
@@ -19,9 +20,6 @@ export class ABCMenuButton extends HTMLElement
 		container.appendChild(this.#button);
 		
 		this.#shadowRoot.appendChild(container);
-		let parentStyle = getComputedStyle(this.#shadowRoot.host);
-		this.#shadowRoot.host.style.setProperty('--default-bg-color', parentStyle.backgroundColor);
-		this.#shadowRoot.host.style.setProperty('--default-fg-color', parentStyle.color);
 		
         if (this.hasAttribute("clicked")) 
 		{
@@ -32,6 +30,15 @@ export class ABCMenuButton extends HTMLElement
 		{
 			this.setAttribute("clicked", "false");
 			this.#button.dataset.clicked = false;
+		}
+		
+        if (this.hasAttribute("id")) 
+		{
+			this.#id = this.getAttribute("id");
+		}
+		else
+		{
+			console.warn("abc-menu-button, cannot default colors without ID attribute");
 		}
 
     }
@@ -48,6 +55,15 @@ export class ABCMenuButton extends HTMLElement
 		this.addEventListener("click", (e) => {
 				e.target.clicked = e.target.clicked == "true" ? "false" : "true";
 			});
+		if (this.#id != null)
+		{
+			setTimeout(() => {
+				let lightMe = document.getElementById(this.#id);
+				let parentStyle = getComputedStyle(lightMe.parentNode);
+				this.#shadowRoot.host.style.setProperty('--default-bg-color', parentStyle.backgroundColor);
+				this.#shadowRoot.host.style.setProperty('--default-fg-color', parentStyle.color);
+			}, 0);
+		}
     }
 
     disconnectedCallback() 
