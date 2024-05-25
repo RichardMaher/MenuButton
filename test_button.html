@@ -33,14 +33,13 @@
 		display: flex;
 		height: 100%;
 	}
+	#myBtn[disabled] {
+		--menu-fg-color: #d3d3d3;
+	}
 	h1 {
 		display: flex;
 		order: 1;
 		width: 100%;
-	}
-	
-	#myBtn[clicked="true"] {
-		opacity: 0.5;
 	}
 	
 	@media (prefers-reduced-motion: reduce) {
@@ -52,12 +51,11 @@
 </style>
 <script type="module">
 
-	import { ABCMenuButton } from "./menu-button.js"
+	import { ABCMenuButton } from "/menu-button.js"
 
     document.addEventListener("DOMContentLoaded", (e) => {
-				let myBtn = document.getElementById("myBtn");
 				myBtn.addEventListener('click', (e) => {
-						console.log("been clicked " + myBtn.clicked);
+						console.log("been pressed " + e.target.pressed);
 						})
 			});
 
@@ -67,8 +65,8 @@
 	function load() {
 		console.log("in load");
 		var x = document.getElementById("myBtn");
-		console.log(x.clicked);
-		x.clicked = false;
+		console.log(x.pressed);
+		x.pressed = false;
 	}
 	
 </script>
@@ -76,7 +74,7 @@
 <body onload="load()">
 	<h1>Burger Menu Web Component Demo</h1>
 	<div id="container">
-		<abc-menu-button id="myBtn" clicked="true"></abc-menu-button>
+		<abc-menu-button id="myBtn" pressed></abc-menu-button>
 	</div>
 </body>
 </html>

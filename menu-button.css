@@ -27,14 +27,14 @@
         transform: scale(1.0);
     }
 }
-.menu_btn[data-clicked=true] > div {
+.menu_btn[data-pressed=true] > div {
   transform: rotate(45deg);
 }
-.menu_btn[data-clicked=true] > div::before {
+.menu_btn[data-pressed=true] > div::before {
   top: 0;
   transform: rotate(0deg);
 }
-.menu_btn[data-clicked=true] > div::after {
+.menu_btn[data-pressed=true] > div::after {
   top: 0;
   transform: rotate(90deg);
 }
