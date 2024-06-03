@@ -11,7 +11,7 @@ export class ABCMenuButton extends HTMLElement
 		this.#internals.ariaRole = "menu";
 		
 		let link = document.createElement('link');
-		link.href = "./menu-button.css";
+		link.href = "../MenuButton/menu-button.css";
 		link.rel = "stylesheet";
 		link.type = "text/css";
 		this.shadowRoot.appendChild(link);
